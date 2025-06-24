@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liang.mapper.UserMapper">
+    <!--动态sql-->
+    <select id="all" resultType="com.liang.pojo.User">
+        select * from user
+        <where>
+            <if test="status!=null">
+                and status=#{status}
+            </if>
+            <if test="status == null or status == ''">
+                and status != '管理员'
+            </if>
+        </where>
+    </select>
+</mapper>
