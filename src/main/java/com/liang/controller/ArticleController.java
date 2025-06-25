@@ -78,4 +78,6 @@ public class ArticleController {
         articleService.updateimg(id,url);
         return Result.success();
     }
+
+
 }
