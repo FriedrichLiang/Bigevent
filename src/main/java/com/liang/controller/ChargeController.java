@@ -42,9 +42,10 @@ public class ChargeController {
             Integer pageNum,
             Integer pageSize,
             @RequestParam(required = false) Integer operatorId,
-            @RequestParam(required = false) String status
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String location
     ) {
-        PageBean<Charge> pb =  chargeService.all(pageNum,pageSize,operatorId,status);
+        PageBean<Charge> pb =  chargeService.all(pageNum,pageSize,operatorId,status,location);
         return Result.success(pb);
     }
 
@@ -81,5 +82,11 @@ public class ChargeController {
     public Result<String> changestatus(@RequestParam Integer id,@RequestParam String newstatus){
         chargeService.changestaus(id,newstatus);
         return Result.success();
+    }
+
+    @GetMapping("/getall")
+    public Result<List<Chargeitem>> getall(){
+
+        return Result.success(chargeService.getall());
     }
 }

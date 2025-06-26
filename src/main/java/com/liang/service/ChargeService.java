@@ -2,10 +2,7 @@ package com.liang.service;
 
 
 
-import com.liang.pojo.Article;
-import com.liang.pojo.ArticleInfo;
-import com.liang.pojo.Charge;
-import com.liang.pojo.PageBean;
+import com.liang.pojo.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +20,13 @@ public interface ChargeService {
 
 //    List<Charge> justGetAll();
 
-    PageBean<Charge> all(Integer pageNum, Integer pageSize, Integer operatorId, String status);
+    PageBean<Charge> all(Integer pageNum, Integer pageSize, Integer operatorId, String status,String location);
 
 //    List<ArticleInfo> browse();
 //
 //    void updateimg(Integer id,String url);
 
     void changestaus(Integer id, String newstatus);
+
+    List<Chargeitem> getall();
 }

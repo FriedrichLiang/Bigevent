@@ -9,10 +9,7 @@ import com.github.pagehelper.PageHelper;
 
 import com.liang.mapper.ArticleMapper;
 import com.liang.mapper.ChargeMapper;
-import com.liang.pojo.Article;
-import com.liang.pojo.ArticleInfo;
-import com.liang.pojo.Charge;
-import com.liang.pojo.PageBean;
+import com.liang.pojo.*;
 import com.liang.service.ArticleService;
 import com.liang.service.ChargeService;
 import com.liang.utils.ThreadLocalUtil;
@@ -54,13 +51,13 @@ public class ChargeServiceImpl implements ChargeService {
     }
 
     @Override
-    public PageBean<Charge> all(Integer pageNum, Integer pageSize, Integer operatorId, String status) {
+    public PageBean<Charge> all(Integer pageNum, Integer pageSize, Integer operatorId, String status,String location) {
         //1.创建PageBean对象
         PageBean<Charge> pb = new PageBean<>();
         //2.开启分页查询 PageHelper
         PageHelper.startPage(pageNum,pageSize);
         //3.调用mapper
-        List<Charge> as = chargeMapper.all(operatorId,status);
+        List<Charge> as = chargeMapper.all(operatorId,status,location);
         //Page中提供了方法,可以获取PageHelper分页查询后 得到的总记录条数和当前页数据
         Page<Charge> p = (Page<Charge>) as;
         //把数据填充到PageBean对象中
@@ -72,6 +69,11 @@ public class ChargeServiceImpl implements ChargeService {
     @Override
     public void changestaus(Integer id, String newstatus) {
         chargeMapper.changestatus(id,newstatus);
+    }
+
+    @Override
+    public List<Chargeitem> getall() {
+        return chargeMapper.getall();
     }
 
 //    @Override

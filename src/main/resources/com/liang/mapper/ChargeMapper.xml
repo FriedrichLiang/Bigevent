@@ -18,15 +18,20 @@
     </select>
 
     <select id="all" resultType="com.liang.pojo.Charge">
-        select * from charge
+        SELECT * FROM charge
         <where>
-            <if test="operatorId!=null">
-                operator_id=#{operatorId}
+            <if test="operatorId != null">
+                operator_id = #{operatorId}
             </if>
 
-            <if test="status!=null">
-                and status=#{status}
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+
+            <if test="location != null and location != ''">
+                AND location LIKE CONCAT('%', #{location}, '%')
             </if>
         </where>
     </select>
+
 </mapper>

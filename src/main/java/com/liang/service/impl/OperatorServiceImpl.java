@@ -30,7 +30,7 @@ public class OperatorServiceImpl implements OperatorService {
     public List<Operator> show() {
         Map<String,Object> map=ThreadLocalUtil.get();
         Integer id=(Integer) map.get("id");
-        return operatorMapper.findall(id);
+        return operatorMapper.all();
     }
 
     @Override
