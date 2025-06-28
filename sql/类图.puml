@@ -1,0 +1,78 @@
+@startuml
+
+' 实体类
+class User {
+    - int id
+    - String username
+    - String password
+    - String nickname
+    - String email
+    - String user_pic
+    - Date create_time
+    - Date update_time
+    - String status
+    - String isclose
+}
+
+class Announcements {
+    - int id
+    - String title
+    - String content
+    - Date time
+    - String isexit
+    - int createuser
+    - String scope
+}
+
+class Balance {
+    - int id
+    - int user_id
+    - float balance
+}
+
+class Operator {
+    - int id
+    - String operator_name
+    - String create_user
+    - String isexit
+}
+
+class Charge {
+    - int id
+    - int operator_id
+    - String model
+    - String location
+    - String status
+}
+
+class CountPrice {
+    - int id
+    - int operator_id
+    - String type
+    - float price1
+    - float price2
+    - float price3
+}
+
+class Orders {
+    - int order_id
+    - int create_user
+    - Date create_time
+    - Date final_time
+    - int order_status
+    - int charge_id
+    - int duration
+    - int count_id
+    - decimal total_price
+}
+
+' 关联关系
+Balance --> User : user_id
+Announcements --> User : createuser
+Charge --> Operator : operator_id
+CountPrice --> Operator : operator_id
+Orders --> User : create_user
+Orders --> Charge : charge_id
+Orders --> CountPrice : count_id
+
+@enduml
