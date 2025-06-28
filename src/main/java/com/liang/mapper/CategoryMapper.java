@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
-//666
+//666666
     @Insert("insert into category(category_name,category_alias,create_user,create_time,update_time,isexit)"+
             "values(#{categoryName},#{categoryAlias},#{createUser},#{createTime},#{updateTime},'true')")
     void add(Category category);
