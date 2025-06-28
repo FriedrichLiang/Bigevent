@@ -36,7 +36,7 @@ public class ChargeController {
         PageBean<Charge> pb =  chargeService.list(pageNum,pageSize,categoryId,state);
         return Result.success(pb);
     }
-  // 555
+  // 555777
     @GetMapping("/all")
     public Result<PageBean<Charge>> all(
             Integer pageNum,
