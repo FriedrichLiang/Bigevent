@@ -84,9 +84,11 @@ public class ChargeController {
         return Result.success();
     }
 
-    @GetMapping("/getall")
-    public Result<List<Chargeitem>> getall(){
 
-        return Result.success(chargeService.getall());
+        @GetMapping("/getall")
+    public Result<List<Charge>> justGetAll(){
+        return Result.success(chargeService.justgetall());
     }
+
+
 }

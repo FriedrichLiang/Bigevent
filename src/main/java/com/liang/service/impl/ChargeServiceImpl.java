@@ -76,6 +76,11 @@ public class ChargeServiceImpl implements ChargeService {
         return chargeMapper.getall();
     }
 
+    @Override
+    public List<Charge> justgetall() {
+        return chargeMapper.justgetall();
+    }
+
 //    @Override
 //    public List<ArticleInfo> browse() {
 //        return articleMapper.browse();

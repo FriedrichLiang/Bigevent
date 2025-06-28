@@ -36,6 +36,10 @@ public interface  ChargeMapper {
     @Select("SELECT c.id, o.operator_name AS operator, c.model, c.location, c.status FROM charge c JOIN operator o ON c.operator_id = o.id;\n")
     List<Chargeitem> getall();
 
+
+    @Select("select * from charge")
+    List<Charge> justgetall();
+
 //    @Select("SELECT a.id AS article_id, a.title AS title, a.content AS content, c.category_name AS category, u.username AS username, u.nickname AS nickname, u.user_pic AS user_pic, a.create_time AS time FROM article a JOIN category c ON a.category_id = c.id JOIN user u ON a.create_user = u.id WHERE a.isexit = 'true' AND a.state = '已发布' ORDER BY a.create_time DESC;")
 //    List<ArticleInfo> browse();
 

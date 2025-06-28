@@ -29,4 +29,6 @@ public interface ChargeService {
     void changestaus(Integer id, String newstatus);
 
     List<Chargeitem> getall();
+
+    List<Charge> justgetall();
 }
