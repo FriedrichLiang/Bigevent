@@ -4,7 +4,6 @@ import com.liang.mapper.FollowMapper;
 import com.liang.pojo.FollowData;
 import com.liang.service.FollowDataService;
 import com.liang.utils.ThreadLocalUtil;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

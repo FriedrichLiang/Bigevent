@@ -2,14 +2,11 @@ package com.liang.service.impl;
 
 import com.liang.mapper.DataMapper;
 import com.liang.pojo.Articledata;
-import com.liang.pojo.Result;
 import com.liang.service.DataService;
 import com.liang.utils.ThreadLocalUtil;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

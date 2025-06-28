@@ -1,7 +1,6 @@
 package com.liang.service;
 
 import com.liang.pojo.Category;
-import com.liang.pojo.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

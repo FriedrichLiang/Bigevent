@@ -1,15 +1,12 @@
 package com.liang.service.impl;
 
-import com.liang.mapper.CategoryMapper;
 import com.liang.mapper.OperatorMapper;
 import com.liang.pojo.Operator;
 import com.liang.service.OperatorService;
 import com.liang.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.OperatorMatches;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +27,7 @@ public class OperatorServiceImpl implements OperatorService {
     public List<Operator> show() {
         Map<String,Object> map=ThreadLocalUtil.get();
         Integer id=(Integer) map.get("id");
-        return operatorMapper.findall(id);
+        return operatorMapper.all();
     }
 
     @Override

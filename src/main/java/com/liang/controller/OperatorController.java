@@ -1,10 +1,8 @@
 package com.liang.controller;
 
-import com.liang.pojo.Category;
 import com.liang.pojo.Operator;
 import com.liang.pojo.Result;
 import com.liang.service.OperatorService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +24,7 @@ public class OperatorController {
 
     @GetMapping("/show")
     public Result<List<Operator>> show(){
+        System.out.println(operatorService.show());
         return Result.success(operatorService.show());
     }
 

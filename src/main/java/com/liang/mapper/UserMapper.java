@@ -1,6 +1,5 @@
 package com.liang.mapper;
 
-import com.liang.pojo.Result;
 import com.liang.pojo.User;
 import com.liang.pojo.UserBrowse;
 import org.apache.ibatis.annotations.Insert;

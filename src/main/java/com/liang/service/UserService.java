@@ -1,7 +1,6 @@
 package com.liang.service;
 
 import com.liang.pojo.PageBean;
-import com.liang.pojo.Result;
 import com.liang.pojo.User;
 import com.liang.pojo.UserBrowse;
 import org.springframework.stereotype.Service;

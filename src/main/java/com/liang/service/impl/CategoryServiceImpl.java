@@ -2,7 +2,6 @@ package com.liang.service.impl;
 
 import com.liang.mapper.CategoryMapper;
 import com.liang.pojo.Category;
-import com.liang.pojo.Result;
 import com.liang.service.CategoryService;
 import com.liang.utils.ThreadLocalUtil;
 

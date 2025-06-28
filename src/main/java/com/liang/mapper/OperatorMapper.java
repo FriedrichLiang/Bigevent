@@ -1,6 +1,5 @@
 package com.liang.mapper;
 
-import com.liang.pojo.Category;
 import com.liang.pojo.Operator;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +15,7 @@ public interface OperatorMapper {
             "VALUES (#{operatorName}, #{createUser}, 'true')")
     void add(Operator operator);
 
-    @Select("SELECT * FROM operator WHERE create_user = #{id} AND isexit = 'true'")
+    @Select("SELECT * FROM operator WHERE isexit = 'true'")
     List<Operator> findall(Integer id);
 
     @Select("SELECT * FROM operator WHERE id = #{id} AND isexit = 'true'")
