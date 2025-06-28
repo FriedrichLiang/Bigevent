@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 25/06/2025 14:26:40
+ Date: 26/06/2025 16:18:49
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `announcements`  (
   `createuser` int unsigned NOT NULL,
   `scope` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of announcements
@@ -65,7 +65,7 @@ CREATE TABLE `article`  (
   INDEX `fk_article_user`(`create_user`) USING BTREE,
   CONSTRAINT `fk_article_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_article_user` FOREIGN KEY (`create_user`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of article
@@ -128,7 +128,7 @@ CREATE TABLE `articledata`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `articleid`(`articleid`) USING BTREE,
   CONSTRAINT `articledata_ibfk_1` FOREIGN KEY (`articleid`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1331 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of articledata
@@ -1330,7 +1330,7 @@ CREATE TABLE `category`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_category_user`(`create_user`) USING BTREE,
   CONSTRAINT `fk_category_user` FOREIGN KEY (`create_user`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
@@ -1362,6 +1362,41 @@ INSERT INTO `category` VALUES (28, ' 人文艺术', 'Art', 3, '2025-01-07 16:37:
 INSERT INTO `category` VALUES (29, '计算机', 'CS', 3, '2025-01-08 14:52:24', '2025-01-08 14:52:24', 'true');
 
 -- ----------------------------
+-- Table structure for charge
+-- ----------------------------
+DROP TABLE IF EXISTS `charge`;
+CREATE TABLE `charge`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `operator_id` int(0) NOT NULL,
+  `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_operator_id`(`operator_id`) USING BTREE,
+  CONSTRAINT `fk_operator_id` FOREIGN KEY (`operator_id`) REFERENCES `operator` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of charge
+-- ----------------------------
+INSERT INTO `charge` VALUES (1, 1, '星闪冲 USA7', '山东省理工大学计算机学院北区域', '故障');
+INSERT INTO `charge` VALUES (2, 2, '山海经-25', '山东理工大学6号宿舍楼', '空闲');
+INSERT INTO `charge` VALUES (3, 1, 'model y', '山东省淄博市', '空闲');
+INSERT INTO `charge` VALUES (4, 2, 'BYD 9006', '山东省济南市市', '空闲');
+INSERT INTO `charge` VALUES (5, 1, '星星充电 DC120kW 国标版', '北京·朝阳·科技园A区', '空闲');
+INSERT INTO `charge` VALUES (6, 2, '蔚来超充 AC7kW 高配版', '上海·浦东·未来科技城', '使用中');
+INSERT INTO `charge` VALUES (7, 3, '小鹏充电桩 AC22kW Type2 Plus', '广州·天河·软件园B栋', '故障');
+INSERT INTO `charge` VALUES (8, 1, '特来电 DC180kW 快充版', '杭州·滨江·阿里园区', '空闲');
+INSERT INTO `charge` VALUES (9, 2, '国家电网交流桩 11kW 标准型', '深圳·南山·科兴科学园', '审核中');
+INSERT INTO `charge` VALUES (10, 3, '蔚来换电站专用桩 DC250kW', '成都·高新区·创新中心', '使用中');
+INSERT INTO `charge` VALUES (11, 2, '星星充电 AC22kW 智能型', '武汉·东湖·光谷软件园', '空闲');
+INSERT INTO `charge` VALUES (12, 1, '特来电 Type2 接口 7kW 家用版', '南京·江宁·大学城', '使用中');
+INSERT INTO `charge` VALUES (13, 3, '小鹏充电 DC120kW 商用版', '西安·雁塔·西电校区', '维修中');
+INSERT INTO `charge` VALUES (14, 1, '星星充电 AC11kW 精简版', '重庆·渝北·两江新区', '空闲');
+INSERT INTO `charge` VALUES (15, 4, '国家电网 XI45', '山东省菏泽市郓城县金河路', '空闲');
+INSERT INTO `charge` VALUES (16, 8, '牡丹1号', ' 山东省菏泽市牡丹区中华路', '空闲');
+
+-- ----------------------------
 -- Table structure for follow
 -- ----------------------------
 DROP TABLE IF EXISTS `follow`;
@@ -1373,7 +1408,7 @@ CREATE TABLE `follow`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_writer_user`(`writer`) USING BTREE,
   CONSTRAINT `fk_writer_user` FOREIGN KEY (`writer`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of follow
@@ -1402,7 +1437,7 @@ CREATE TABLE `followstatus`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_followstatus_userid`(`userid`) USING BTREE,
   CONSTRAINT `fk_followstatus_userid` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of followstatus
@@ -1440,7 +1475,7 @@ CREATE TABLE `history`  (
   INDEX `userid`(`userid`) USING BTREE,
   CONSTRAINT `history_ibfk_1` FOREIGN KEY (`articleid`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `history_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 356 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of history
@@ -1812,7 +1847,7 @@ CREATE TABLE `operator`  (
   `create_user` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `isexit` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of operator
@@ -1822,6 +1857,9 @@ INSERT INTO `operator` VALUES (2, '中国比亚迪', '3', 'true');
 INSERT INTO `operator` VALUES (3, '中国台湾台积电', '3', 'true');
 INSERT INTO `operator` VALUES (4, '中国宁德时代', '3', 'true');
 INSERT INTO `operator` VALUES (5, '东亚日本新能源', '3', 'true');
+INSERT INTO `operator` VALUES (6, '美国华盛顿斯塔克科技', '3', 'false');
+INSERT INTO `operator` VALUES (7, '北韩阿里郎电子工程', '3', 'true');
+INSERT INTO `operator` VALUES (8, '中国鲁西能源', '3', 'true');
 
 -- ----------------------------
 -- Table structure for user
@@ -1840,7 +1878,7 @@ CREATE TABLE `user`  (
   `isclose` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -1852,7 +1890,7 @@ INSERT INTO `user` VALUES (4, 'lilili', '1a100d2c0dab19c4430e7d73762b3423', 'mik
 INSERT INTO `user` VALUES (5, 'admin', '972a3d48ffe4e286930d1c059b4fab31', '', '', '', '2024-12-24 16:50:58', '2024-12-24 16:50:58', '管理员', NULL);
 INSERT INTO `user` VALUES (6, '老舍的小院', 'e10adc3949ba59abbe56e057f20f883e', 'laoshe', '', '', '2024-12-25 18:38:42', '2024-12-25 18:38:42', '创作者', NULL);
 INSERT INTO `user` VALUES (7, 'zzzzz', '972a3d48ffe4e286930d1c059b4fab31', 'zhihu', '', '', '2024-12-25 19:16:57', '2024-12-25 19:16:57', '创作者', NULL);
-INSERT INTO `user` VALUES (8, 'reader', '972a3d48ffe4e286930d1c059b4fab31', 'Dear', '', '', '2024-12-26 08:59:40', '2025-01-07 17:07:43', '普通用户', 'true');
+INSERT INTO `user` VALUES (8, 'reader', '972a3d48ffe4e286930d1c059b4fab31', 'Dear', '', '', '2024-12-26 08:59:40', '2025-06-26 15:50:06', '普通用户', NULL);
 INSERT INTO `user` VALUES (9, 'blueMan', '972a3d48ffe4e286930d1c059b4fab31', '', '', '', '2024-12-30 10:50:53', '2024-12-30 10:50:53', '创作者', NULL);
 INSERT INTO `user` VALUES (10, 'aoyin', '972a3d48ffe4e286930d1c059b4fab31', '', '', '', '2024-12-30 15:01:46', '2024-12-30 15:01:46', '创作者', NULL);
 INSERT INTO `user` VALUES (11, '尼采的小屋', '972a3d48ffe4e286930d1c059b4fab31', 'nieche', '', 'http://localhost:8080/avatar/0a0e8722-5f38-40c1-a8ed-b8bd10d0a960.png', '2024-12-30 16:05:43', '2024-12-31 16:07:01', '创作者', NULL);
