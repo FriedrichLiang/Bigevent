@@ -180,7 +180,7 @@ public class OrderServiceImpl implements OrderService {
             // 未开始 → 充电中
             orderMapper.updateStatus(orderId, 3);
         } else if (status == 3) {
-            // 充电中 → 待支付
+            // 充电中 → 待支付88888
             orderMapper.updateStatus(orderId, 1);
         } else if (status == 1) {
 
