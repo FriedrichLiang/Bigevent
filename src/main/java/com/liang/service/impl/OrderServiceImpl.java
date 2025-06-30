@@ -13,7 +13,9 @@ import com.liang.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -254,6 +256,50 @@ public class OrderServiceImpl implements OrderService {
         chargeMapper.changestatus(order.getChargeId(), "空闲");
 
     }
+
+
+//查充电桩次数
+@Override
+public List<Map<String, Object>> countAllChargeUsage() {
+    return orderMapper.countAllChargeUsage();
+}
+//查充电桩时长
+@Override
+public List<Map<String, Object>> getChargeDurationStats() {
+    return orderMapper.getChargeDurationStats();
+}
+
+
+//    @Override
+//    public void deleteTimeoutOrders() {
+//        List<Orders> unstarted = orderMapper.findUnstartedOrders();
+//        LocalDateTime now = LocalDateTime.now();
+//        for (Orders order : unstarted) {
+//            if (java.time.Duration.between(order.getCreateTime(), now).toMinutes() >= 1) {
+//                orderMapper.deleteById(order.getOrderId());
+//            }
+//        }
+//    }
+
+
+    @Override
+    public int deleteTimeoutOrders() {
+        List<Orders> unstartedOrders = orderMapper.findUnstartedOrders();
+        int count = 0;
+        for (Orders order : unstartedOrders) {
+            // 添加时间判断：未开始超过 1 分钟
+            if (Duration.between(order.getCreateTime(), LocalDateTime.now()).getSeconds() >= 60) {
+                orderMapper.deleteById(order.getOrderId());
+                chargeMapper.changestatus(order.getChargeId(), "空闲");
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+
+
 
 
 

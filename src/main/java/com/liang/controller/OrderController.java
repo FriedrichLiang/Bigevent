@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -138,6 +139,34 @@ public class OrderController {
             default -> "未知";
         };
     }
+
+    //查充电桩次数
+    @GetMapping("/getnum")
+    public Result<List<Map<String, Object>>> countAllChargeUsage() {
+        List<Map<String, Object>> list = orderService.countAllChargeUsage();
+        return Result.success(list);
+    }
+    //查充电时长
+    @GetMapping("/gettime")
+    public Result<List<Map<String, Object>>> getChargeDurationStats() {
+        List<Map<String, Object>> result = orderService.getChargeDurationStats();
+        return Result.success(result);
+    }
+
+    @Scheduled(fixedRate = 60000) // 每60秒执行一次
+    public void autoDeleteTimeoutOrders() {
+        orderService.deleteTimeoutOrders();
+    }
+
+    @GetMapping("/deleteTimeout")
+    public Result deleteTimeout() {
+        int deleted = orderService.deleteTimeoutOrders();
+        return Result.success(deleted); // 把删除的数量返回前端
+    }
+
+
+
+
 
 
 

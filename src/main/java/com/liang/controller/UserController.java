@@ -31,6 +31,21 @@
         @Autowired
         private UserService userService;
 
+//        @PostMapping("/register")
+//        public Result register(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password, String status){
+//            if (status.equals("管理员")||status.equals("超级管理员")){
+//                return Result.error("你没有权限！");
+//            }
+//            User user=userService.findByUsername(username);
+//            if (user==null){
+//                userService.register(username,password,status);
+//                return Result.success();
+//            }
+//            else {
+//                return Result.error("已被占用");
+//            }
+//        }
+
         @PostMapping("/register")
         public Result register(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password, String status){
             if (status.equals("管理员")||status.equals("超级管理员")){
@@ -38,14 +53,16 @@
             }
             User user=userService.findByUsername(username);
             if (user==null){
-                userService.register(username,password,status);
+                Integer userId = userService.register(username,password,status);
+                if(status.equals("普通用户")){
+                    userService.initBalance(userId);
+                }
                 return Result.success();
             }
             else {
                 return Result.error("已被占用");
             }
         }
-
         @PostMapping("/createadmin")
         public Result createadmin(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password){
             if (username==null || password == null){

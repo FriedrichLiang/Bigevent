@@ -17,15 +17,25 @@ public class CountpriceServiceImpl implements CountpriceService {
     public void add(Countprice countprice) {
         countpriceMapper.insert(countprice);
     }
-
+    public boolean existsByOperatorId(Integer operatorId) {
+        return countpriceMapper.existsByOperatorId(operatorId);
+    }
     @Override
     public void remove(Integer id) {
         countpriceMapper.deleteById(id);
     }
 
-    @Override
-    public void modify(Countprice countprice) {
-        countpriceMapper.update(countprice);
+//    @Override
+//    public void modify(Countprice countprice) {
+//        countpriceMapper.update(countprice);
+//    }
+@Override
+public void modify(Countprice countprice) {
+    countpriceMapper.update(countprice);
+}
+
+    public boolean existsByOperatorIdExcludeSelf(Integer id, Integer operatorId) {
+        return countpriceMapper.existsByOperatorIdExcludeSelf(id, operatorId);
     }
 
     @Override

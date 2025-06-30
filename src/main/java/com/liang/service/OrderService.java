@@ -5,6 +5,7 @@ import com.liang.pojo.PageBean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface OrderService {
@@ -22,6 +23,18 @@ public interface OrderService {
     void updateStatus(Integer orderId, Integer status);
     void nextStatus(Integer orderId);
     void cancelToPay(Integer orderId);
+    //查充电桩次数
+    List<Map<String, Object>> countAllChargeUsage();
+    //查充电时长
+    List<Map<String, Object>> getChargeDurationStats();
+
+    int deleteTimeoutOrders(); // 返回删除数量
+
+
+
+
+
+
 
 
 

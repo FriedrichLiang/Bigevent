@@ -10,7 +10,8 @@ import java.util.List;
 @Service
 public interface UserService {
     User findByUsername(String username);
-    void register(String username,String password,String status);
+//    void register(String username,String password,String status);
+   Integer register(String username,String password,String status);
 
     void update(User user);
 
@@ -35,4 +36,5 @@ public interface UserService {
     List<User> getalladmin();
 
     void createadmin(String username, String password);
+    public void initBalance(Integer userId);
 }

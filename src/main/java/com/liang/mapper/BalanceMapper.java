@@ -16,6 +16,6 @@ public interface BalanceMapper {
     void update(Balance balance);
 //
 //    // 可选：插入新用户余额记录
-//    @Insert("INSERT INTO balance (user_id, balance) VALUES (#{userId}, #{balance})")
-//    void insert(Balance balance);
+@Insert("INSERT INTO balance (user_id, balance) VALUES (#{userId}, 0)")
+void insert(Integer userId);
 }

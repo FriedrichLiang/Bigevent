@@ -55,5 +55,9 @@ public class BalanceServiceImpl implements BalanceService {
         balance.setBalance(newBalance);
         balanceMapper.update(balance);
     }
+    @Override
+    public void insert(Integer userId) {
+        balanceMapper.insert(userId);
+    }
 
 }

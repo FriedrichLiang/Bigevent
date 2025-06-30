@@ -12,4 +12,5 @@ public interface BalanceService {
 
     void deductBalance(Integer userId, Float amount);
 
+    void insert(Integer userId);
 }

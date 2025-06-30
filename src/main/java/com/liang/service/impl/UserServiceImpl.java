@@ -4,11 +4,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.liang.mapper.UserMapper;
 import com.liang.pojo.*;
+import com.liang.service.BalanceService;
 import com.liang.service.UserService;
 import com.liang.utils.Md5Util;
 import com.liang.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private BalanceService balanceService;
 
     @Override
     public User findByUsername(String username) {
@@ -26,13 +30,27 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+//    @Override
+//    public void register(String username, String password,String status) {
+//        System.out.println(username+" "+password);
+//        String md5string = Md5Util.getMD5String(password);
+//        userMapper.add(username,md5string,status);
+//    }
     @Override
-    public void register(String username, String password,String status) {
-        System.out.println(username+" "+password);
-        String md5string = Md5Util.getMD5String(password);
-        userMapper.add(username,md5string,status);
-    }
+    @Transactional
 
+    public Integer register(String username, String password, String status) {
+    System.out.println(username+" "+password);
+    String md5string = Md5Util.getMD5String(password);
+        System.out.println(md5string);
+    userMapper.add(username, md5string, status);
+    // 获取刚插入的用户ID
+    return userMapper.getLastInsertId();
+    }
+    @Override
+    public void initBalance(Integer userId) {
+        balanceService.insert(userId);
+    }
     @Override
     public void update(User user) {
         user.setUpdateTime(LocalDateTime.now());
@@ -108,6 +126,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createadmin(String username, String password) {
-        userMapper.createadmin(username,password);
+        String md5string = Md5Util.getMD5String(password);
+        userMapper.createadmin(username,md5string);
     }
 }

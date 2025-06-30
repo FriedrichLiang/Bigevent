@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -63,8 +64,11 @@ public interface OrderMapper {
     void cancelOrder(@Param("orderId") Integer orderId,
                      @Param("finalTime") LocalDateTime finalTime,
                      @Param("duration") Integer duration);
-    @Select("SELECT * FROM orders")
-    List<Orders> selectAllOrders();
+//    @Select("SELECT * FROM orders")
+//    List<Orders> selectAllOrders();
+@Select("SELECT * FROM orders ORDER BY create_time DESC")
+List<Orders> selectAllOrders();
+
 
     @Update("UPDATE orders SET final_time = #{finalTime}, duration = #{duration}, order_status = 2 WHERE order_id = #{orderId}")
     void finishOrder(@Param("orderId") Integer orderId,
@@ -84,6 +88,25 @@ public interface OrderMapper {
     WHERE o.order_id = #{orderId}
 """)
     OrderExportVO getOrderExportInfo(@Param("orderId") Integer orderId);
+
+    //查充电桩次数
+    @Select("SELECT charge_id AS chargeId, COUNT(*) AS num FROM orders GROUP BY charge_id")
+    List<Map<String, Object>> countAllChargeUsage();
+
+    //统计充电桩使用总时间
+    @Select("SELECT charge_id AS chargeId, SUM(duration) AS time FROM orders GROUP BY charge_id")
+    List<Map<String, Object>> getChargeDurationStats();
+
+    //自动监测订单结束
+    @Select("SELECT * FROM orders WHERE order_status = 0")
+    List<Orders> findUnstartedOrders();
+
+    @Delete("DELETE FROM orders WHERE order_id = #{orderId}")
+    void deleteById(@Param("orderId") Integer orderId);
+
+
+
+
 
 
 

@@ -18,6 +18,8 @@ public interface UserMapper {
     @Insert("insert into user(username,password,create_time,update_time,status)"+
             "values(#{username},#{password},now(),now(),#{status})")
     public void add(String username,String password,String status);
+    @Select("SELECT LAST_INSERT_ID()")
+    Integer getLastInsertId();
 
     @Update("update user set nickname=#{nickname},email=#{email},update_time=#{updateTime} where id=#{id}")
     void update(User user);
@@ -49,10 +51,10 @@ public interface UserMapper {
     @Select("SELECT u.id AS userId, u.username, COALESCE(SUM(fs.count), 0) AS totalBrowse FROM user u JOIN followstatus fs ON u.id = fs.userid WHERE u.status = '创作者' GROUP BY u.id, u.username ORDER BY totalBrowse DESC LIMIT 5;")
     List<UserBrowse> getuserfollow();
 
-    @Select("select * from user where status = '管理员'")
+    @Select("select * from user where status = '创作者'")
     List<User> getalladmin();
 
     @Insert("insert into user(username,password,create_time,update_time,status)"+
-            "values(#{username},#{password},now(),now(),'管理员')")
+            "values(#{username},#{password},now(),now(),'创作者')")
     void createadmin(String username, String password);
 }

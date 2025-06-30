@@ -10,4 +10,6 @@ public interface CountpriceService {
     List<Countprice> getAll();              // 查询全部
     Countprice getById(Integer id);
     Countprice selectByOperatorId(Integer operatorId);
+    boolean existsByOperatorId(Integer operatorId);
+    boolean existsByOperatorIdExcludeSelf(Integer id, Integer operatorId);
 }
