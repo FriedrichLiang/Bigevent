@@ -204,7 +204,7 @@ public class OrderServiceImpl implements OrderService {
         long minutes = java.time.Duration.between(order.getCreateTime(), now).toMinutes();
         int duration = (int) (minutes == 0 ? 1 : minutes);
 
-        // 设置订单为“待支付”状态
+        // 设置订单为“待支付”状态6666
         orderMapper.updateStatus(orderId, 1);
 
         String countIdStr = order.getCountId(); // 获取计费方式ID（String类型）
