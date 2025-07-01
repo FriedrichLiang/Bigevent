@@ -185,6 +185,7 @@ public class OrderServiceImpl implements OrderService {
         } else if (status == 1) {
 
             Integer userId = order.getCreateUser();
+
             Float totalPrice = order.getTotalPrice().floatValue();
             // 待支付 → 已支付
             balanceService.deductBalance(userId, totalPrice);
