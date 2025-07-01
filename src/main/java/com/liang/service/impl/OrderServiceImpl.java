@@ -175,7 +175,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         int status = order.getOrderStatus() == null ? 0 : order.getOrderStatus();
-
+//888888888888888888888
         if (status == 0) {
             // 未开始 → 充电中
             orderMapper.updateStatus(orderId, 3);
